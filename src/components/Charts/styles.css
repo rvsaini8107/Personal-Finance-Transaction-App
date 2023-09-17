@@ -1,0 +1,18 @@
+.charts-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 5% 0;
+  }
+  .charts-1.charts-div {
+    width: 58%;
+    box-shadow: var(--shadow);
+    border-radius: 15px;
+    padding: 2%;
+  }
+  .charts-2.chart-div {
+    width: 38%;
+    box-shadow: var(--shadow);
+    border-radius: 15px;
+    padding: 2%;
+  }

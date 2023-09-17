@@ -1,0 +1,33 @@
+.navbar{
+    background-color: var(--theme);
+    padding: 1rem 1.5rem;
+    position:static;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+}
+.logo{
+    color: var(--white);
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0;
+}
+.logout-btn{
+    color: var(--white);
+    cursor: pointer;
+}
+img.UserProfileImg {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
