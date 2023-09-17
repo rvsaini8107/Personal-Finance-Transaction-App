@@ -1,5 +1,5 @@
 {
-  "name": "personal-finance-tracker-app",
+  "name": "personal-finance-transaction-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
