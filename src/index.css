@@ -12,7 +12,8 @@ font-family: 'Roboto Mono', monospace;
 font-family: 'Source Sans 3', sans-serif;
 font-family: 'Yatra One', cursive; */
 :root{
-    --theme:#2970ff;
+    /* --theme:#2970ff; */
+    --theme:#30ff29e5;
     --black:#000000;
     --white:#ffffff;
     --shadow:0px 0px 30px 8px rgba(227,227,227,0.75);
