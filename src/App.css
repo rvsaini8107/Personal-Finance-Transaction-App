@@ -5,3 +5,34 @@
     width: 100vw;
     height: 90vh;
 }
+/* media queries */
+@media screen and (max-width: 968px) {
+    .charts-1.charts-div {
+        width: 100%;
+      }
+      .charts-2.chart-div {
+        width: 90%;
+      }
+
+    .charts-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .ant-select.select-input.select-input-filter.css-dev-only-do-not-override-i0102m.ant-select-single.ant-select-allow-clear.ant-select-show-arrow {
+        width: 20%;
+      }
+      .TransactionsSecRow {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .ant-table-wrapper.css-dev-only-do-not-override-i0102m {
+        overflow-x: scroll;
+      }
+      .chart-line-my > canvas {
+        width: 90% !important;
+      }
+      .chart-line-my {
+        overflow-x: scroll;
+      }
+}

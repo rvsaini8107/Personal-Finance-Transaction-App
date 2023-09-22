@@ -85,7 +85,7 @@ spendingData.forEach((item) => {
     <div className="charts-wrapper">
       <div className="charts-1 charts-div">
         <h2 className="chart-heading">Your Analytics</h2>
-        <Line
+        <Line className="chart-line-my"
           {...config}
           onReady={(chartInstance) => (chart = chartInstance)}
         />
