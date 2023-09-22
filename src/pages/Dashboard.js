@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Cards from "../components/Cards";
 import { Modal } from "antd";
+import pftImage from "./../images/pft.png";
 import AddExpense from "../components/Modals/AddExpense";
 import AddIncome from "../components/Modals/AddIncome";
+import { Button, message, Popconfirm } from 'antd';
 import {
   Transaction,
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getDocs,
   query,
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
+
 import { toast } from "react-toastify";
 import moment from "moment";
 import TransactionsTable from "../components/TransactionsTable";
@@ -28,6 +33,7 @@ function Dashboard() {
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [totalBalance, setTotalBalance] = useState(0);
+  const [allDataId, setAllDataId] = useState([]);
 
   const onFinish = (values, type) => {
     setBtnLoader(true);
@@ -40,11 +46,11 @@ function Dashboard() {
       name: values.name,
     };
     console.log(newTransaction, "<<<newTransaction");
-    addTransaction(newTransaction, type);
+    addTransaction(newTransaction);
     setBtnLoader(false);
   };
 
-  async function addTransaction(transaction, type) {
+  async function addTransaction(transaction, type = "") {
     try {
       // Create our initial doc
       const docRef = await addDoc(
@@ -54,13 +60,8 @@ function Dashboard() {
 
       console.log("Document written with ID: ", docRef.id);
 
-      toast.success("Transaction Added!");
-      if (type) {
-        if (type == "expense") {
-          handelExpenseModalCancel();
-        } else if (type == "income") {
-          handelIncomeModalCancel();
-        }
+      if (!type) {
+        toast.success("Transaction Added!");
       }
 
       let newArr = transactions;
@@ -85,6 +86,10 @@ function Dashboard() {
   const handelIncomeModalCancel = () => {
     setIsIncomeModalVisible(false);
   };
+  useEffect(() => {
+    // get all docs from the collection
+    fetchTransactions();
+  }, []);
   useEffect(() => {
     // get all docs from the collection
     fetchTransactions();
@@ -116,11 +121,15 @@ function Dashboard() {
     if (user) {
       const q = query(collection(db, `users/${user.uid}/transactions`));
       const querySnapshot = await getDocs(q);
+
       let transactionsArray = [];
+      let userDocId = [];
       querySnapshot.forEach((doc) => {
+        userDocId.push(doc.id);
         // doc.data() is never undefined for query doc snapshots
         transactionsArray.push(doc.data());
       });
+      setAllDataId(userDocId);
       setTransactions(transactionsArray);
       console.log("transactions Array>>>", transactionsArray);
       toast.success("Transactions Fetched!");
@@ -130,6 +139,23 @@ function Dashboard() {
   let sortedTransaction = transactions.sort(
     (a, b) => new Date(a.date) - new Date(b.date)
   );
+  // restDAta all
+  async function restAllData() {
+    
+    
+      try {
+        allDataId.forEach((docIdThis) => {
+          deleteDoc(doc(db, `users/${user.uid}/transactions/${docIdThis}`));
+        });
+        toast.success("All Data Reset");
+        fetchTransactions();
+      } catch (error) {
+        console.log(error, "my error Delete");
+        toast.error(error.message);
+      }
+    
+  }
+  
   return (
     <>
       <Header />
@@ -137,14 +163,13 @@ function Dashboard() {
         <p style={{ textAlign: "center", marginTop: "20rem" }}>Loading...</p>
       ) : (
         <div>
-          {/* https://www.w3schools.com/howto/img_avatar.png */}
-
           <Cards
             income={income}
             expense={expense}
             totalBalance={totalBalance}
             showExpenseModal={showExpenseModal}
             showIncomeModal={showIncomeModal}
+            restAllData={restAllData}
           />
           <AddIncome
             isIncomeModalVisible={isIncomeModalVisible}
@@ -161,7 +186,14 @@ function Dashboard() {
           {transactions.length > 0 ? (
             <ChartsComponent sortedTransaction={sortedTransaction} />
           ) : (
-            "Not Transactions Still"
+            <div className="pft-img-cover">
+              <img
+                src={pftImage}
+                alt="Not Transactions Still"
+                className="pftImge"
+              />
+              <div className="no-pft-data">Not Transactions Still</div>
+            </div>
           )}
           <TransactionsTable
             transactions={transactions}

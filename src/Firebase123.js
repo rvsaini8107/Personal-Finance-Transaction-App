@@ -4,7 +4,7 @@ import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-const analytics = getAnalytics(app);
+
 
 // console.log(process.env.REACT_APP_FIREBASE_KEY,"apiiiiiiiiiiiiiiiiiiiiii");
 const firebaseConfig = {
@@ -26,12 +26,22 @@ const firebaseConfig = {
 };
 
 
+// // Initialize Firebase
+
+// export const app = initializeApp(firebaseConfig);
+// export const db = getFirestore(app);
+// export const auth = getAuth(app);
+
+
 // Initialize Firebase
 
-export const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
+export { db, auth,analytics, provider, doc, getDoc};
 
 
  

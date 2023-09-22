@@ -13,9 +13,12 @@ const Header = () => {
     if (!user) {
       navigate("/");
     } else {
+      if(!localStorage.getItem("user")){
+        localStorage.setItem("user",true);
+      }
       navigate("/dashboard");
     }
-    console.log(user, "<<<<<user");
+    console.log(user, "<<<<<user1");
   }, [user, loading]);
  
   function Logout() {
@@ -23,6 +26,9 @@ const Header = () => {
       signOut(auth)
         .then(() => {
           // Sign-out successful.
+          if(localStorage.getItem("user")){
+            localStorage.removeItem("user");
+          }
           toast.success("Logout Successful");
           navigate("/");
         })

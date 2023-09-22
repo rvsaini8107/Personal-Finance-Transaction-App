@@ -78,7 +78,7 @@ const TransactionsTable = ({
               amount: parseFloat(transaction.amount),
             };
             if(newTransaction.name) {
-               await addTransaction(newTransaction);
+               await addTransaction(newTransaction,"more");
             }
            
           }

@@ -5,6 +5,7 @@ import Button from "./../Button";
 const Cards = ({
   showExpenseModal,
   showIncomeModal,
+  restAllData,
   income,
   expense,
   totalBalance,
@@ -15,7 +16,7 @@ const Cards = ({
       <Row className="my-row">
         <Card title="Current Balance" className="my-card">
           <p className="current-balance">₹ {totalBalance}</p>
-          <Button text="Reset Balance" blue={true} />
+          <Button text="Reset Balance" blue={true} onClick={restAllData} />
         </Card>
         <Card title="Total Income" className="my-card">
           <p className="current-balance">₹ {income}</p>

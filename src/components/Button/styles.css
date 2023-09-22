@@ -18,13 +18,13 @@
 
 .btn:hover{
     background-color: var(--theme);
-    color: #fff;
+    color: var(--white);
     transition: all 0.3s;
 }
 
 .btn-blue{
     background-color: var(--theme);
-    color: #fff;
+    color: var(--white);
 }
 
 .btn-blue:hover{
