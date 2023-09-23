@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
 import { Radio, Select, Table } from "antd";
-import searchIcon from "../../images/search.png";
+import searchIcon from "../../assist/images/search.png";
 import { parse, unparse } from "papaparse";
 import { toast } from "react-toastify";
 const TransactionsTable = ({

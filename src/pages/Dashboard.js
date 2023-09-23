@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Cards from "../components/Cards";
 import { Modal } from "antd";
-import pftImage from "./../images/pft.png";
+import pftImage from "./../assist/images/pft.png";
 import AddExpense from "../components/Modals/AddExpense";
 import AddIncome from "../components/Modals/AddIncome";
 import { Button, message, Popconfirm } from 'antd';

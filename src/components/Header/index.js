@@ -5,6 +5,7 @@ import { auth } from "./../../firebase";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import logoutIcon from "../../assist/images/logout.png";
 
 const Header = () => {
   const [user, loading] = useAuthState(auth);
@@ -13,20 +14,20 @@ const Header = () => {
     if (!user) {
       navigate("/");
     } else {
-      if(!localStorage.getItem("user")){
-        localStorage.setItem("user",true);
+      if (!localStorage.getItem("user")) {
+        localStorage.setItem("user", true);
       }
       navigate("/dashboard");
     }
     console.log(user, "<<<<<user1");
   }, [user, loading]);
- 
+
   function Logout() {
     try {
       signOut(auth)
         .then(() => {
           // Sign-out successful.
-          if(localStorage.getItem("user")){
+          if (localStorage.getItem("user")) {
             localStorage.removeItem("user");
           }
           toast.success("Logout Successful");
@@ -56,9 +57,17 @@ const Header = () => {
             alt="profile"
             className="UserProfileImg"
           />
-          <p className="logout-btn" onClick={() => Logout()}>
-            Logout
-          </p>
+
+          {logoutIcon ? (
+            <img
+              src={logoutIcon}
+              alt="Logout"
+              onClick={() => Logout()}
+              className="logout-btn"
+            />
+          ) : (
+            "Logout"
+          )}
         </div>
       )}
     </div>
